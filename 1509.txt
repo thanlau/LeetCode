@@ -1,0 +1,31 @@
+1509. Minimum Difference Between Largest and Smallest Value in Three Moves
+
+Given an array nums, you are allowed to choose one element of nums 
+and change it by any value in one move.
+
+Return the minimum difference between the largest and smallest 
+value of nums after perfoming at most 3 moves.
+
+Answer: consider the array [1,3,4,2,3], we can first sort the array
+to get [1,2,3,3,4]. Then the question becomes to we want to close the max value
+and min value. Thus, we can have 4 different conditions:
+1. We convert the 3 minium value to the max value, which leads to
+[4,4,4,3,4]. Then we only need to calculate the difference of 4th minimum value
+and the max value
+2. We convert 2 minum value to the max value, which gives us:
+[4,4,3,3,4], then the smallest value of the new array is 3rd value.
+3. We convert 1 smallest value to the max value, which gives us:
+[4,2,3,3,4], then the smallest value is 2nd value.
+So basically we have such above three condtions.
+def minDifference(nums):
+  n = len(nums)
+  nums.sort()
+  return min(nums[n - 4 + i] - nums[i] for i in range(4))
+the sort takes nlgn, we need constant space to store the input.
+
+Because we only care about the first 4 smallest value and first 4 largest value.
+So we don't actually need sort. We can use two array to keep 8 values,
+4 for small and 4 for the large.
+Check the LeetCode.
+
+
